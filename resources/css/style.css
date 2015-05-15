@@ -1,0 +1,59 @@
+
+body, html{
+    background: #F3F3F3;
+}
+.navbar{
+    border-bottom: 0;
+}
+
+.navbar-brand {
+    font-size: 40px;
+    font-weight: 100;
+}
+
+.main {
+    margin-top: 50px;
+}
+
+.op1{opacity: 0.1;}
+.op2{opacity: 0.2;}
+.op3{opacity: 0.3;}
+.op4{opacity: 0.4;}
+.op5{opacity: 0.5;}
+.op6{opacity: 0.6;}
+.op7{opacity: 0.7;}
+.op8{opacity: 0.8;}
+.op9{opacity: 0.9;}
+.op10{opacity: 1;}
+
+.tf {
+    font-size:0;
+    opacity: 0;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+/*html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+   Margin bottom by footer height 
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+   Set the fixed height of the footer here 
+  height: 60px;
+  background-color: #2780E3;
+  color: #fff
+}
+.footer a{
+    color:#fff;
+}*/
+
+/* parallax Top landing
+-------------------------------------------------- */
+
