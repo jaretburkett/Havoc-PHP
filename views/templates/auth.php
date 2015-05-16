@@ -24,19 +24,19 @@
             background-color: #eee;
         }
 
-        .form-signin {
+        .form-auth {
             max-width: 330px;
             padding: 15px;
             margin: 0 auto;
         }
-        .form-signin .form-signin-heading,
-        .form-signin .checkbox {
+        .form-auth .form-signin-heading,
+        .form-auth .checkbox {
             margin-bottom: 10px;
         }
-        .form-signin .checkbox {
+        .form-auth .checkbox {
             font-weight: normal;
         }
-        .form-signin .form-control {
+        .form-auth .form-control {
             position: relative;
             height: auto;
             -webkit-box-sizing: border-box;
@@ -45,25 +45,15 @@
             padding: 10px;
             font-size: 16px;
         }
-        .form-signin .form-control:focus {
+        .form-auth .form-control:focus {
             z-index: 2;
         }
-        .form-signin input[type="email"] {
-            margin-bottom: -1px;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-        .form-signin input[type="password"] {
-            margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
-        .form-signin img{
+        .form-auth img{
             max-width: 100%;
             height:auto;
             margin-bottom: 30px;
         }
-        .form-signin button{
+        .form-auth button{
             margin: 30px 0;
         }
     </style>
@@ -73,6 +63,11 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Form Validation plugin. Learn more at http://jqueryvalidation.org/ -->
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -86,8 +81,8 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 </body>
 </html>
 

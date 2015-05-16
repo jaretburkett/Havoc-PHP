@@ -6,7 +6,7 @@
  *******************************************************************/
 
 // include framework variables
-include (DIR_ROOT.'/config/vars.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/config/vars.php');
 
 /***********************
  * Process Vars
@@ -20,19 +20,19 @@ if($report_errors){
 }
 
 // include auth functions
-include (DIR_ROOT.'/backend/auth/auth_functions.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/backend/auth/auth_functions.php');
 
 // include the routes
-include(DIR_ROOT . '/routes/routes.php');
-include(DIR_ROOT . '/routes/auth_routes.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/routes/routes.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/routes/auth_routes.php');
 
 // include router
-include(DIR_ROOT . '/backend/router.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/backend/router.php');
 
 //content added to var for easy include
-$content = (DIR_ROOT.'/views/content/'. $page['content'].'.php');
+$content = ($_SERVER['DOCUMENT_ROOT'].'/views/content/'. $page['content'].'.php');
 
 // get the template
-include (DIR_ROOT.'/views/templates/'. $page['template'].'.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/views/templates/'. $page['template'].'.php');
 
 

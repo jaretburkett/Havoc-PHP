@@ -1,5 +1,5 @@
 <?php
-include(DIR_ROOT . '/config/connect.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/config/connect.php');
 
 /********************************************************
  * Is Logged In?
@@ -10,44 +10,75 @@ include(DIR_ROOT . '/config/connect.php');
 function isLoggedIn()
 {
     // check to see if cookies are set
-    if (isset($_COOKIE['email']) && isset($_COOKIE['password'])) {
+    if (isset($_COOKIE['email']) && isset($_COOKIE['saltypass'])) {
         // if cookies set, get cookies
         $email = $_COOKIE['email'];
-        $password = $_COOKIE['password'];
+        $saltypass = $_COOKIE['saltypass'];
 
         // pull global connection var
         global $con;
 
-        // check to make sure cookies are accurate
-        $sql = "SELECT * FROM users WHERE email='$email' and password='$password'";
+        // pull user data and check salty pass
+        $sql = "SELECT * FROM users WHERE email='$email'";
         $result = mysqli_query($con, $sql);
-
-        // Mysql_num_row is counting table row
-        $count = mysqli_num_rows($result);
-
-        // If result matched $email and $password, table row must be 1 row
-        if ($count == 1) {
-            //cookie user name and password are correct
-            return true;
-        } // if cookie username and password do not match return not logged in
-        else
+        if ($result->num_rows > 0) {
+            while($user = $result->fetch_assoc()) {
+                if (password_verify($saltypass, $user['password'])) {
+                    // it matches
+                    return true;
+                } else {
+                    // It doesnt match
+                    return false;
+                }
+            }
+        }
+        else // user does not exist
             return false;
-    } //cookies not set return not logged in
-    else
+    }
+    else //cookies not set return not logged in
         return false;
 }
 
 /********************************************************
- * Get Salt
+ * Get Ramdom
  *
- * Generates a random 10 character salt for password hashing
+ * Generates a random 10 character alpha-numeric string
  ********************************************************/
-function getSalt($length = 10)
+function getRandom($length = 10)
 {
     $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $salt = '';
+    $rand = '';
     for ($count = 0; $count < $length; $count++) {
-        $salt .= $chars[rand(0, strlen($chars) - 1)];
+        $rand .= $chars[rand(0, strlen($chars) - 1)];
     }
-    return $salt;
+    return $rand;
+}
+
+/********************************************************
+ * Get salt
+ *
+ * Generates a random 10 character alpha-numeric string
+ ********************************************************/
+function getSalt()
+{
+    return getRandom(10);
+}
+
+/********************************************************
+ * Get salt
+ *
+ * Generates unique 20 character string for tmp_users
+ ********************************************************/
+function getTmpHash()
+{
+    $unique = false;
+    while ($unique != true){
+        $rand = getRandom(20);
+        $sql = "SELECT * FROM tmp_users WHERE 'hash' = '$rand'";
+        $result = $conn->query($sql);
+        if ($result->num_rows == 0) {
+            $unique = true;
+        }
+    }
+    return $rand;
 }

@@ -5,10 +5,10 @@
 $route[] = [
     'url' => null,
     'template' => 'main',
-    'content' => 'dashboard',
+    'content' => 'home',
     'data' => [
-        'title' => 'iNeed',
-        'description' => 'Everything'
+        'title' => 'Havoc',
+        'description' => 'Welcome to havoc'
     ],
     'needs_auth' => true, // needs to be logged in to access
     'auth_redirect' => 'login' // redirects to auth route if not logged in

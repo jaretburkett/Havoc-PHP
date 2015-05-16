@@ -4,6 +4,13 @@ $report_errors = TRUE;
 //auth and they are not logged in. Can be overridden in routes.
 $default_nonauth_redirect = 'login';
 
+// the default route to redirect to if they try to visit an
+//auth page and they are logged in
+$default_auth_redirect = null;
+
+// this is used in various places in the login scripts
+$website_name = 'HavocPHP';
+
 /**********************
  * Set Domain Name
  *********************/

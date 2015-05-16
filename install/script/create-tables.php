@@ -1,11 +1,17 @@
 <?php
 include ($_SERVER['DOCUMENT_ROOT'].'/config/connect.php');
-// sql to create table
+
+// setup a holder to count success
+$tables_created = 0;
+
+// set a var to hold errors
+$errors = '';
+// Create user tables
 $sql = "CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
-  `password` varchar(160) NOT NULL,
-  `salt` varchar(10) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `salt` varchar(11) NOT NULL,
   `firstname` varchar(50) DEFAULT NULL,
   `lastname` varchar(50) DEFAULT NULL,
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -13,9 +19,35 @@ $sql = "CREATE TABLE IF NOT EXISTS `users` (
 )";
 
 if ($con->query($sql) === TRUE) {
+    $tables_created++;
+} else {
+    $errors .= "Error creating Havoc user table: " . $con->error. '<br>';
+}
+
+// create temp user table. Users will be placed here until they confirm email.
+$sql = "CREATE TABLE IF NOT EXISTS `tmp_users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `hash` varchar(21) DEFAULT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `salt` varchar(11) NOT NULL,
+  `firstname` varchar(50) DEFAULT NULL,
+  `lastname` varchar(50) DEFAULT NULL,
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+)";
+
+
+if ($con->query($sql) === TRUE) {
+    $tables_created++;
+} else {
+    $errors .= "Error creating Havoc tmp_user table: " . $con->error. '<br>';
+}
+
+if ($tables_created == 2) {
     echo "Havoc PHP Tables Created Successfully";
 } else {
-    echo "Error creating Havoc Tables: " . $con->error;
+    echo $errors;
 }
 
 $con->close();

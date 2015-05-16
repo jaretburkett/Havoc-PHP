@@ -50,3 +50,5 @@ crashlytics-build.properties
 
 
 .idea
+config/git_ignored_vars.php
+testing.php

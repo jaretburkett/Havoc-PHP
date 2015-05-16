@@ -18,6 +18,18 @@ if(empty($page)){
     foreach ($auth_route as &$page) {
         // if the url matches first clean url var
         if($page['url'] == $var1){
+            // see if they are logged in and attempting to visit auth page. Redirect if they are.
+            if(isLoggedIn()){
+                if($default_auth_redirect == null){
+                    // if null, go to root directory
+                    header( 'Location: '.$domain.'/' ) ;
+                    break;
+                } else {
+                    // if something else is specified, go there
+                    header( 'Location: '.$domain.'/'.$default_auth_redirect.'/' ) ;
+                    break;
+                }
+            }
             break;
         }
         unset($page);
@@ -46,6 +58,7 @@ if (array_key_exists('needs_auth', $page)) {
         }
     }
 }
+
 
 // These are the droids you are looking for.
 
