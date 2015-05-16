@@ -7,13 +7,13 @@
             <strong>Login</strong> to <?php echo $website_name; ?>
         </div>
         <div class="form-group">
-            <label for="inputEmail" class="sr-only">Email address</label>
+            <label for="username" class="sr-only">Username</label>
 
             <div class="input-group">
                 <div class="input-group-addon">
                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                 </div>
-                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus>
+                <input type="text" name="username" id="username" class="form-control" placeholder="Username" autofocus>
             </div>
         </div>
         <div class="form-group">
@@ -50,9 +50,8 @@
             $(form).ajaxSubmit();
         },
         rules: {
-            email: {
-                required: true,
-                email: true
+            username: {
+                required: true
             },
             password: {
                 required:true,
@@ -62,8 +61,7 @@
         },
         messages: {
             email: {
-                required: "Enter your email",
-                email: "Not a valid email address"
+                required: "Enter your username"
             },
             password:{
                 required: 'Enter a password',

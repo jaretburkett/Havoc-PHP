@@ -1,3 +1,7 @@
+<?php
+// TODO add username field
+?>
+
 <div class="container">
 
     <form class="form-auth">
@@ -7,13 +11,23 @@
             <strong>Register</strong> for <?php echo $website_name; ?>
         </div>
         <div class="form-group">
+            <label for="username" class="sr-only">Username</label>
+
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                </div>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" autofocus>
+            </div>
+        </div>
+        <div class="form-group">
             <label for="inputEmail" class="sr-only">Email address</label>
 
             <div class="input-group">
                 <div class="input-group-addon">
                     <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                 </div>
-                <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" autofocus>
+                <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address">
             </div>
         </div>
         <div class="form-group">
@@ -33,7 +47,8 @@
                 <div class="input-group-addon">
                     <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
                 </div>
-                <input type="password" id="password2"name="password2" class="form-control" placeholder="Password Again">
+                <input type="password" id="password2" name="password2" class="form-control"
+                       placeholder="Password Again">
             </div>
         </div>
         <div class="form-group">
@@ -59,7 +74,7 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
         <div class="row">
             <div class="col-xs-6 text-center">
-                <a href="<?php echo $domain.'/login/'; ?>">
+                <a href="<?php echo $domain . '/login/'; ?>">
                     <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
                     &nbsp; Login
                 </a>
@@ -76,16 +91,39 @@
 </div> <!-- /container -->
 <script>
     $('.form-auth').validate({
-        submitHandler: function(form) {
+        submitHandler: function (form) {
             $(form).ajaxSubmit();
         },
         rules: {
+            username:{
+                required: true,
+                minlength: 3,
+                maxlength: 20,
+                remote: {
+                    url: "<?php echo $domain.'/backend/auth/check_username_availability.php'; ?>",
+                    type: "post",
+                    data: {
+                        login: function () {
+                            return $('.form-auth :input[name="username"]').val();
+                        }
+                    }
+                }
+            },
             email: {
                 required: true,
-                email: true
+                email: true,
+                remote: {
+                    url: "<?php echo $domain.'/backend/auth/check_email_availability.php'; ?>",
+                    type: "post",
+                    data: {
+                        login: function () {
+                            return $('.form-auth :input[name="email"]').val();
+                        }
+                    }
+                }
             },
             password: {
-                required:true,
+                required: true,
                 minlength: 6,
                 maxlength: 20
             },
@@ -105,17 +143,24 @@
             }
         },
         messages: {
+            username:{
+                required: "Pick a username",
+                remote: "This username is taken",
+                minlength: $.validator.format("Username must be more than {0} characters"),
+                maxlength: $.validator.format("Username cannot be more than {0} characters")
+            },
             email: {
                 required: "Enter your email",
-                email: "Not a valid email address"
+                email: "Not a valid email address",
+                remote: "This email is already registered"
             },
-            password:{
+            password: {
                 required: 'Enter a password',
                 minlength: $.validator.format("Password must be more than {0} characters")
             },
             password2: {
                 required: 'Enter password again',
-                equalTo:'Your passwords do not match'
+                equalTo: 'Your passwords do not match'
             },
             firstname: {
                 required: 'Enter your first name'
@@ -124,16 +169,16 @@
                 required: 'Enter your last name'
             }
         },
-        highlight: function(element) {
+        highlight: function (element) {
             $(element).closest('.form-group').addClass('has-error');
         },
-        unhighlight: function(element) {
+        unhighlight: function (element) {
             $(element).closest('.form-group').removeClass('has-error');
         },
         errorElement: 'span',
         errorClass: 'help-block',
-        errorPlacement: function(error, element) {
-            if(element.parent('.input-group').length) {
+        errorPlacement: function (error, element) {
+            if (element.parent('.input-group').length) {
                 error.insertAfter(element.parent());
             } else {
                 error.insertAfter(element);

@@ -67,7 +67,7 @@ foreach ($user as $key => $value) {
 if ($con->query($sql) === TRUE) {
     // success, go ahead and store cookies so they wont have to login later
     // TODO make a way where a var can change cookie length
-    setcookie("email",$user['email'],time()+31556926 ,'/'); // set cookie for a year
+    setcookie("username",$user['username'],time()+31556926 ,'/'); // set cookie for a year
     setcookie("saltypass",$saltypass,time()+31556926 ,'/'); // set cookie for a year
 } else {
     $errors = "Error : " . $con->error . '<br>';

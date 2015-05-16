@@ -10,16 +10,16 @@ include($_SERVER['DOCUMENT_ROOT'] . '/config/connect.php');
 function isLoggedIn()
 {
     // check to see if cookies are set
-    if (isset($_COOKIE['email']) && isset($_COOKIE['saltypass'])) {
+    if (isset($_COOKIE['username']) && isset($_COOKIE['saltypass'])) {
         // if cookies set, get cookies
-        $email = $_COOKIE['email'];
+        $username = $_COOKIE['username'];
         $saltypass = $_COOKIE['saltypass'];
 
         // pull global connection var
         global $con;
 
         // pull user data and check salty pass
-        $sql = "SELECT * FROM users WHERE email='$email'";
+        $sql = "SELECT * FROM users WHERE username='$username'";
         $result = mysqli_query($con, $sql);
         if ($result->num_rows > 0) {
             while($user = $result->fetch_assoc()) {

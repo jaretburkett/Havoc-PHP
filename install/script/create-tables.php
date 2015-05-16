@@ -9,6 +9,7 @@ $errors = '';
 // Create user tables
 $sql = "CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(21) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `salt` varchar(11) NOT NULL,
@@ -28,6 +29,7 @@ if ($con->query($sql) === TRUE) {
 $sql = "CREATE TABLE IF NOT EXISTS `tmp_users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `hash` varchar(21) DEFAULT NULL,
+  `username` varchar(21) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `salt` varchar(11) NOT NULL,
