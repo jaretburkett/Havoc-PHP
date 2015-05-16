@@ -30,9 +30,9 @@ include(DIR_ROOT . '/routes/auth_routes.php');
 include(DIR_ROOT . '/backend/router.php');
 
 //content added to var for easy include
-$content = $pathtocontent. $page['content'].'.php';
+$content = (DIR_ROOT.'/views/content/'. $page['content'].'.php');
 
 // get the template
-include $pathtotemplates . $page['template'].'.php';
+include (DIR_ROOT.'/views/templates/'. $page['template'].'.php');
 
 

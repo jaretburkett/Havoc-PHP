@@ -6,10 +6,10 @@
 $auth_route[]=[
     'url' => 'login',
     'template' => 'auth',
-    'content' => 'login',
+    'content' => 'auth/login',
     'data' => [
-        'title' => 'iNeed - Login',
-        'description' => 'Login to iNeed'
+        'title' => 'Havoc - Login',
+        'description' => 'Login to Havoc'
     ]
 ];
 
@@ -19,11 +19,23 @@ $auth_route[]=[
 $auth_route[]=[
     'url' => 'register',
     'template' => 'auth',
-    'content' => 'register',
+    'content' => 'auth/register',
     'data' => [
-        'title' => 'iNeed - Register',
-        'description' => 'Sign Up to iNeed'
+        'title' => 'Havoc - Register',
+        'description' => 'Sign Up to Havoc'
     ]
 ];
 
+/**********************
+ * Forgot Password
+ *********************/
+$auth_route[]=[
+    'url' => 'forgot_password',
+    'template' => 'auth',
+    'content' => 'auth/forgot_password',
+    'data' => [
+        'title' => 'Havoc - Forgot Password',
+        'description' => 'Reset your password'
+    ]
+];
 

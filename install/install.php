@@ -13,7 +13,7 @@
 
     <link rel="icon"
           type="image/png"
-          href="favicon.png">
+          href="../resources/img/favicon.png">
 
     <!-- Custom styles for this template -->
     <style>
@@ -37,7 +37,7 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1><img src="logo-name.png">
+        <h1><img src="../resources/img/logo.png">
             <small>v0.1</small>
         </h1>
         <hr>
