@@ -6,10 +6,6 @@ $mysql_vars = [
     'password' => 'yourpassword',   // Mysql password
     'db_name' => 'havoc'            // Database name
 ];
-$connect_host="localhost"; // Host name 
-$connect_username="root"; // Mysql username
-$connect_password=""; // Mysql password
-$connect_db_name="havoc"; // Database name
 
 // include special file that is git ignored to store sensitive data
 // if it exists, the git_ignored_vars.php file overrides these vars
