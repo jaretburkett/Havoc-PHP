@@ -8,8 +8,8 @@ $auth_route[]=[
     'template' => 'auth',
     'content' => 'auth/login',
     'data' => [
-        'title' => 'Havoc - Login',
-        'description' => 'Login to Havoc'
+        'title' => $website_name.' - Login',
+        'description' => 'Login to '.$website_name
     ],
     'allow_auth' => false, // dont allows authenticated users to visit
     'auth_redirect' => null // redirect to home page if logged in
@@ -23,8 +23,8 @@ $auth_route[]=[
     'template' => 'auth',
     'content' => 'auth/register',
     'data' => [
-        'title' => 'Havoc - Register',
-        'description' => 'Sign Up to Havoc'
+        'title' => $website_name.' - Register',
+        'description' => 'Sign Up to '.$website_name
     ],
     'allow_auth' => false, // dont allows authenticated users to visit
     'auth_redirect' => null // redirect to home page if logged in
@@ -38,7 +38,7 @@ $auth_route[]=[
     'template' => 'auth',
     'content' => 'auth/confirm_email',
     'data' => [
-        'title' => 'Havoc - Email Confirmed',
+        'title' => $website_name.' - Email Confirmed',
         'description' => 'You have sucessfully confirmed your email'
     ],
     'allow_auth' => false, // dont allows authenticated users to visit
@@ -53,7 +53,7 @@ $auth_route[]=[
     'template' => 'auth',
     'content' => 'auth/forgot_password',
     'data' => [
-        'title' => 'Havoc - Forgot Password',
+        'title' => $website_name.' - Forgot Password',
         'description' => 'Reset your password'
     ],
     'allow_auth' => false, // dont allows authenticated users to visit
@@ -68,7 +68,7 @@ $auth_route[]=[
     'template' => 'auth',
     'content' => 'auth/logout',
     'data' => [
-        'title' => 'Havoc - Logout',
+        'title' => $website_name.' - Logout',
         'description' => 'Logging you out'
     ],
     'allow_auth' => true // allows authenticated users to visit
