@@ -76,7 +76,11 @@ if ($con->query($sql) === TRUE) {
     setcookie("username",$user['username'],time()+31556926 ,'/'); // set cookie for a year
     setcookie("saltypass",$saltypass,time()+31556926 ,'/'); // set cookie for a year
 } else {
-    echo "Error : " . $con->error . '<br>';
+    $response = [
+        'code' => '0',
+        'message' => "Error : " . $con->error . '<br>'
+    ];
+    echo json_encode($response);
     die();
 }
 
@@ -171,7 +175,15 @@ $mail->addAttachment($_SERVER['DOCUMENT_ROOT'].'/resources/img/logo.png', 'logo_
 
 //send the message, check for errors
 if (!$mail->send()) {
-    echo "Mailer Error: " . $mail->ErrorInfo;
+    $response = [
+        'code' => '0',
+        'message' => 'Mailer Error: ' . $mail->ErrorInfo
+    ];
+    echo json_encode($response);
 } else {
-    echo "Message sent!";
+    $response = [
+        'code' => '1',
+        'message' => 'Check your email for an activation link'
+    ];
+    echo json_encode($response);
 }

@@ -7,83 +7,86 @@
     <form class="form-auth">
         <img src="<?php echo $domain . '/resources/img/logo.png'; ?>"/>
 
-        <div class="well">
-            <strong>Register</strong> for <?php echo $website_name; ?>
-        </div>
-        <div class="form-group">
-            <label for="username" class="sr-only">Username</label>
+        <div class="toReplace">
+            <div class="well">
+                <strong>Register</strong> for <?php echo $website_name; ?>
+            </div>
+            <div class="form-group">
+                <label for="username" class="sr-only">Username</label>
 
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </div>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="Username"
+                           autofocus>
                 </div>
-                <input type="text" id="username" name="username" class="form-control" placeholder="Username" autofocus>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="inputEmail" class="sr-only">Email address</label>
+            <div class="form-group">
+                <label for="inputEmail" class="sr-only">Email address</label>
 
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                    </div>
+                    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address">
                 </div>
-                <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address">
             </div>
-        </div>
-        <div class="form-group">
-            <label for="password" class="sr-only">Password</label>
+            <div class="form-group">
+                <label for="password" class="sr-only">Password</label>
 
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    </div>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
                 </div>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Password">
             </div>
-        </div>
-        <div class="form-group">
-            <label for="password2" class="sr-only">Password Again</label>
+            <div class="form-group">
+                <label for="password2" class="sr-only">Password Again</label>
 
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                    </div>
+                    <input type="password" id="password2" name="password2" class="form-control"
+                           placeholder="Password Again">
                 </div>
-                <input type="password" id="password2" name="password2" class="form-control"
-                       placeholder="Password Again">
             </div>
-        </div>
-        <div class="form-group">
-            <label for="firstname" class="sr-only">First Name</label>
+            <div class="form-group">
+                <label for="firstname" class="sr-only">First Name</label>
 
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </div>
+                    <input type="text" id="firstname" name="firstname" class="form-control" placeholder="First Name">
                 </div>
-                <input type="text" id="firstname" name="firstname" class="form-control" placeholder="First Name">
             </div>
-        </div>
-        <div class="form-group">
-            <label for="lastname" class="sr-only">Last Name</label>
+            <div class="form-group">
+                <label for="lastname" class="sr-only">Last Name</label>
 
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </div>
+                    <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last Name">
                 </div>
-                <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last Name">
             </div>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
-        <div class="row">
-            <div class="col-xs-6 text-center">
-                <a href="<?php echo $domain . '/login/'; ?>">
-                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-                    &nbsp; Login
-                </a>
-            </div>
-            <div class="col-xs-6 text-center">
-                <a href="<?php echo $domain . '/forgot_password/'; ?>">
-                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                    &nbsp; Forgot Password
-                </a>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+            <div class="row">
+                <div class="col-xs-6 text-center">
+                    <a href="<?php echo $domain . '/login/'; ?>">
+                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                        &nbsp; Login
+                    </a>
+                </div>
+                <div class="col-xs-6 text-center">
+                    <a href="<?php echo $domain . '/forgot_password/'; ?>">
+                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                        &nbsp; Forgot Password
+                    </a>
+                </div>
             </div>
         </div>
     </form>
@@ -91,7 +94,7 @@
 <script>
     $('.form-auth').validate({
         rules: {
-            username:{
+            username: {
                 required: true,
                 minlength: 3,
                 maxlength: 20,
@@ -139,7 +142,7 @@
             }
         },
         messages: {
-            username:{
+            username: {
                 required: "Pick a username",
                 remote: "This username is taken",
                 minlength: $.validator.format("Username must be more than {0} characters"),
@@ -171,7 +174,7 @@
         unhighlight: function (element) {
             $(element).closest('.form-group').removeClass('has-error');
         },
-        submitHandler: function() {
+        submitHandler: function () {
             submitForm()
         },
         errorElement: 'span',
@@ -185,25 +188,41 @@
         }
     });
 
-    function submitForm(){
+    function submitForm() {
         // TODO make a loading display. takes a while. fade for now
+        // remove classes of well
+        $('.toReplace').removeClass('alert alert-danger alert-success');
+
         // dim until loaded
-        $('.form-auth').fadeTo( "fast", 0.20 );
+        $('.form-auth').fadeTo("fast", 0.20);
         var formdata = $('.form-auth').serializeArray();
+        console.log(formdata);
         $.ajax(
             {
-                url : "<?php echo $domain.'/backend/auth/register_script.php'; ?>",
+                url: "<?php echo $domain.'/backend/auth/register_script.php'; ?>",
                 type: "POST",
-                data : formdata,
-                success:function(data)
-                {
+                //contentType: "application/json",
+                data: formdata,
+                success: function (data) {
+                    console.log(data);
+                    // parse json data
+                    var response = JSON.parse(data);
+
+                    // change well color based on response
+                    if (response['code'] == 0) {
+                        // failed, show in well
+                        $('.toReplace').addClass('alert alert-danger');
+                        $('.toReplace').html(response['message']);
+                    } else if (response['code'] == 1) {
+                        // success, show in well
+                        $('.toReplace').addClass('alert alert-success');
+                        $('.toReplace').html(response['message']);
+                    }
                     // undim after done
-                    $('.form-auth').fadeTo( "slow", 1 );
-                    $('.well').html(data);
+                    $('.form-auth').fadeTo("fast", 1);
 
                 },
-                error: function(jqXHR, textStatus, errorThrown)
-                {
+                error: function (jqXHR, textStatus, errorThrown) {
                     //if fails
                 }
             });
