@@ -25,6 +25,9 @@ function isLoggedIn()
             while($user = $result->fetch_assoc()) {
                 if (password_verify($saltypass, $user['password'])) {
                     // it matches
+                    // refresh cookie
+                    setcookie("username",$username,time()+31556926 ,'/'); // set cookie for a year
+                    setcookie("saltypass",$saltypass,time()+31556926 ,'/'); // set cookie for a year
                     return true;
                 } else {
                     // It doesnt match
