@@ -1,7 +1,3 @@
-<?php
-// TODO add username field
-?>
-
 <div class="container">
 
     <form class="form-auth">

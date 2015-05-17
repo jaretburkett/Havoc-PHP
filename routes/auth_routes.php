@@ -27,6 +27,19 @@ $auth_route[]=[
 ];
 
 /**********************
+ *  Confirm Email Page
+ *********************/
+$auth_route[]=[
+    'url' => 'confirm_email',
+    'template' => 'auth',
+    'content' => 'auth/confirm_email',
+    'data' => [
+        'title' => 'Havoc - Email Confirmed',
+        'description' => 'You have sucessfully confirmed your email'
+    ]
+];
+
+/**********************
  * Forgot Password
  *********************/
 $auth_route[]=[
