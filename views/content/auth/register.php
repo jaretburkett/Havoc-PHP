@@ -192,7 +192,6 @@
         // dim until loaded
         $('.form-auth').fadeTo("fast", 0.20);
         var formdata = $('.form-auth').serializeArray();
-        console.log(formdata);
         $.ajax(
             {
                 url: "<?php echo $domain.'/backend/auth/register_script.php'; ?>",
