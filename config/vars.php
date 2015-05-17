@@ -26,11 +26,11 @@ $domain = $protocol . "://" . $_SERVER['HTTP_HOST'];
 /**********************
  * Set linkers
  *********************/
-$pathtopartials = $_SERVER['DOCUMENT_ROOT'].'/includes/partials/';
-$pathtocontent = $_SERVER['DOCUMENT_ROOT'].'/includes/content/';
-$pathtosections = $_SERVER['DOCUMENT_ROOT'].'/includes/sections/';
-$pathtosnippets = $_SERVER['DOCUMENT_ROOT'].'/includes/snippets/';
-$pathtotemplates = $_SERVER['DOCUMENT_ROOT'].'/includes/templates/';
+$pathtopartials = $_SERVER['DOCUMENT_ROOT'].'/views/partials/';
+$pathtocontent = $_SERVER['DOCUMENT_ROOT'].'/views/content/';
+$pathtosections = $_SERVER['DOCUMENT_ROOT'].'/views/sections/';
+$pathtosnippets = $_SERVER['DOCUMENT_ROOT'].'/views/snippets/';
+$pathtotemplates = $_SERVER['DOCUMENT_ROOT'].'/views/templates/';
 
 // make east include for connect. just include $connect;
 $connect =  $_SERVER['DOCUMENT_ROOT'].'/config/connect.php';
