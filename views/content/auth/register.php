@@ -87,13 +87,9 @@
             </div>
         </div>
     </form>
-
 </div> <!-- /container -->
 <script>
     $('.form-auth').validate({
-        submitHandler: function (form) {
-            $(form).ajaxSubmit();
-        },
         rules: {
             username:{
                 required: true,
@@ -175,6 +171,9 @@
         unhighlight: function (element) {
             $(element).closest('.form-group').removeClass('has-error');
         },
+        submitHandler: function() {
+            submitForm()
+        },
         errorElement: 'span',
         errorClass: 'help-block',
         errorPlacement: function (error, element) {
@@ -185,4 +184,28 @@
             }
         }
     });
+
+    function submitForm(){
+        // TODO make a loading display. takes a while. fade for now
+        // dim until loaded
+        $('.form-auth').fadeTo( "fast", 0.20 );
+        var formdata = $('.form-auth').serializeArray();
+        $.ajax(
+            {
+                url : "<?php echo $domain.'/backend/auth/register_script.php'; ?>",
+                type: "POST",
+                data : formdata,
+                success:function(data)
+                {
+                    // undim after done
+                    $('.form-auth').fadeTo( "slow", 1 );
+                    $('.well').html(data);
+
+                },
+                error: function(jqXHR, textStatus, errorThrown)
+                {
+                    //if fails
+                }
+            });
+    }
 </script>

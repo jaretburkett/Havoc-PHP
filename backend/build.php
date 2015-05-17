@@ -33,6 +33,6 @@ include($_SERVER['DOCUMENT_ROOT'] . '/backend/router.php');
 $content = ($_SERVER['DOCUMENT_ROOT'].'/views/content/'. $page['content'].'.php');
 
 // get the template
-include ($_SERVER['DOCUMENT_ROOT'].'/views/templates/'. $page['template'].'.php');
+include ($_SERVER['DOCUMENT_ROOT'] . '/views/templates/'. $page['template'].'.php');
 
 

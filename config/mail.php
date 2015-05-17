@@ -42,5 +42,5 @@ $reg_email =[
 
 // include special file that is git ignored to store sensitive data
 // if it exists, the git_ignored_vars.php file overrides these vars
-if(file_exists(DIR_ROOT.'/config/git_ignored_vars.php'))
-    include (DIR_ROOT.'/config/git_ignored_vars.php');
+if(file_exists($_SERVER['DOCUMENT_ROOT'].'/config/git_ignored_vars.php'))
+    include ($_SERVER['DOCUMENT_ROOT'].'/config/git_ignored_vars.php');

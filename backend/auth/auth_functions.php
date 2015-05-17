@@ -71,11 +71,12 @@ function getSalt()
  ********************************************************/
 function getTmpHash()
 {
+    global $con;
     $unique = false;
     while ($unique != true){
         $rand = getRandom(20);
         $sql = "SELECT * FROM tmp_users WHERE 'hash' = '$rand'";
-        $result = $conn->query($sql);
+        $result = $con->query($sql);
         if ($result->num_rows == 0) {
             $unique = true;
         }

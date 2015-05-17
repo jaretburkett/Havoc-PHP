@@ -26,12 +26,19 @@ foreach ($_POST as $key => $value) {
 
 //generate a salt specific to the user
 $salt = getSalt();
+
+// set salt in new user array
+$user['salt'] = $salt;
+
 // get a salty password to hash from and store in cookies
-$saltypass= crypt($password,$salt);
+$saltypass= crypt($user['password'],$salt);
+
 // change the password to be stored to a password hash of the salty password
 $user['password'] = password_hash($saltypass, PASSWORD_DEFAULT);
 
-// Super secure
+/***********************************
+ * This method should be very secure
+ **********************************/
 
 
 // generate unique hash for email link url
@@ -54,15 +61,14 @@ foreach ($user as $key => $value) {
 $sql .= ") VALUES (";
 $i = 1;
 $len = count($user);
-$sql = "INSERT INTO tmp_users (";
 foreach ($user as $key => $value) {
     $sql .= "'$value'";
     if ($i != $len) // add comma if not last
         $sql .= ", ";
     $i++;
 }
+$sql .= ')';
 // mysql script now in $sql
-
 
 if ($con->query($sql) === TRUE) {
     // success, go ahead and store cookies so they wont have to login later
@@ -70,7 +76,8 @@ if ($con->query($sql) === TRUE) {
     setcookie("username",$user['username'],time()+31556926 ,'/'); // set cookie for a year
     setcookie("saltypass",$saltypass,time()+31556926 ,'/'); // set cookie for a year
 } else {
-    $errors = "Error : " . $con->error . '<br>';
+    echo "Error : " . $con->error . '<br>';
+    die();
 }
 
 /*****************************************
@@ -96,7 +103,7 @@ if ($send_via == 'smtp') {
     // 0 = off (for production use)
     // 1 = client messages
     // 2 = client and server messages
-    $mail->SMTPDebug = 2;
+    $mail->SMTPDebug = 0;
 
     //Ask for HTML-friendly debug output
     $mail->Debugoutput = 'html';
@@ -140,19 +147,27 @@ $mail->addAddress($user['email'], $user['firstname'] . ' ' . $user['lastname']);
 $mail->Subject = $reg_email['subject']; // var set in config/mail.php
 
 //TODO make a system to use html files in email
-//Read an HTML message body from an external file, convert referenced images to embedded,
-//convert HTML into a basic plain-text alternative body
-//$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
 
-// make the body from var in /config/mail.php
+// process php code and pass hash var
+ob_start();
+$hash = $user['hash'];
+include ( $_SERVER['DOCUMENT_ROOT'] . '/views/email/register.php');
+$this_mail_body = ob_get_clean();
+
+//Read a php message body from an external file, convert referenced images to embedded,
+//convert HTML into a basic plain-text alternative body. Process php file as php.
+$mail->Body = $this_mail_body;
+
+// make the body for plain text from var in /config/mail.php
+
 $mail_body_partial = explode('%link%', $reg_email['body']);
-$mail_body = $mail_body_partial[0] . $domain . '/confirm_email/' . $user['hash'] . '/';
+$mail_body = $mail_body_partial[0] . $domain . '/confirm_email/' . $user['hash'] . '/'.$mail_body_partial[1];
 
 //Replace the plain text body with one created manually
 $mail->AltBody = $mail_body;
 
 //Attach an image file
-//$mail->addAttachment('images/phpmailer_mini.png');
+$mail->addAttachment($_SERVER['DOCUMENT_ROOT'].'/resources/img/logo.png', 'logo_2u');
 
 //send the message, check for errors
 if (!$mail->send()) {

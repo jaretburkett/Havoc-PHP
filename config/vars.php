@@ -26,14 +26,14 @@ $domain = $protocol . "://" . $_SERVER['HTTP_HOST'];
 /**********************
  * Set linkers
  *********************/
-$pathtopartials = DIR_ROOT.'/includes/partials/';
-$pathtocontent = DIR_ROOT.'/includes/content/';
-$pathtosections = DIR_ROOT.'/includes/sections/';
-$pathtosnippets = DIR_ROOT.'/includes/snippets/';
-$pathtotemplates = DIR_ROOT.'/includes/templates/';
+$pathtopartials = $_SERVER['DOCUMENT_ROOT'].'/includes/partials/';
+$pathtocontent = $_SERVER['DOCUMENT_ROOT'].'/includes/content/';
+$pathtosections = $_SERVER['DOCUMENT_ROOT'].'/includes/sections/';
+$pathtosnippets = $_SERVER['DOCUMENT_ROOT'].'/includes/snippets/';
+$pathtotemplates = $_SERVER['DOCUMENT_ROOT'].'/includes/templates/';
 
 // make east include for connect. just include $connect;
-$connect =  DIR_ROOT.'/config/connect.php';
+$connect =  $_SERVER['DOCUMENT_ROOT'].'/config/connect.php';
 
 // set a town for the demo
 $town = 'Midland, TX';
