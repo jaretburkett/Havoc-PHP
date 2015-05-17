@@ -70,6 +70,7 @@ foreach ($user as $key => $value) {
 $sql .= ')';
 // mysql script now in $sql
 
+// todo make a way to check if user exists
 if ($con->query($sql) === TRUE) {
     // success, go ahead and store cookies so they wont have to login later
     // TODO make a way where a var can change cookie length

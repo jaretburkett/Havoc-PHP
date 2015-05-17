@@ -50,7 +50,7 @@ if(empty($page)){
     }
 }
 
-// TODO add 404 routes
+// TODO add 404 routes. It breaks if unfound currently
 
 
 // check if needs auth

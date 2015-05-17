@@ -48,6 +48,7 @@ $auth_route[]=[
 /**********************
  * Forgot Password
  *********************/
+// request email
 $auth_route[]=[
     'url' => 'forgot_password',
     'template' => 'auth',
@@ -59,6 +60,20 @@ $auth_route[]=[
     'allow_auth' => false, // dont allows authenticated users to visit
     'auth_redirect' => null // redirect to home page if logged in
 ];
+
+// link from email
+$auth_route[]=[
+    'url' => 'reset_password',
+    'template' => 'auth',
+    'content' => 'auth/reset_password',
+    'data' => [
+        'title' => $website_name.' - Forgot Password',
+        'description' => 'Reset your password'
+    ],
+    'allow_auth' => false, // dont allows authenticated users to visit
+    'auth_redirect' => null // redirect to home page if logged in
+];
+
 
 /**********************
  *  logout page

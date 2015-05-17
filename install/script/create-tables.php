@@ -1,6 +1,7 @@
 <?php
 include ($_SERVER['DOCUMENT_ROOT'].'/config/connect.php');
 
+// todo make the request run through ajax and show response
 // setup a holder to count success
 $tables_created = 0;
 

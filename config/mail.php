@@ -39,6 +39,13 @@ $reg_email =[
         ."Go to this link to confirm verify your email. %link% "
 ];
 
+// registration email
+$forgot_pass_email =[
+    'subject' => "Password Reset",
+    'body' => "To reset your password to $website_name. "
+        ."Go to this link %link% "
+];
+
 
 // include special file that is git ignored to store sensitive data
 // if it exists, the git_ignored_vars.php file overrides these vars
