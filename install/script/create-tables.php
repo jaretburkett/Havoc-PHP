@@ -46,7 +46,23 @@ if ($con->query($sql) === TRUE) {
     $errors .= "Error creating Havoc tmp_user table: " . $con->error. '<br>';
 }
 
-if ($tables_created == 2) {
+
+// Create forgot password table
+$sql = "CREATE TABLE IF NOT EXISTS `forgot_pass` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `userID` int(10) NOT NULL,
+  `hash` varchar(21) NOT NULL,
+  `req_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+)";
+
+if ($con->query($sql) === TRUE) {
+    $tables_created++;
+} else {
+    $errors .= "Error creating Havoc user table: " . $con->error. '<br>';
+}
+
+if ($tables_created == 3) {
     echo "Havoc PHP Tables Created Successfully";
 } else {
     echo $errors;

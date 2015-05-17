@@ -5,16 +5,16 @@
 
         <div class="well">
             <strong>Forgot Password</strong> to <?php echo $website_name; ?>?<br>
-            Enter your email and we will email you with a recovery link.
+            Enter your username and we will email you with a recovery link.
         </div>
         <div class="form-group">
-            <label for="inputEmail" class="sr-only">Email address</label>
+            <label for="username" class="sr-only">Username</label>
 
             <div class="input-group">
                 <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                 </div>
-                <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
             </div>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Reset Password</button>
@@ -41,15 +41,14 @@
             $(form).ajaxSubmit();
         },
         rules: {
-            email: {
+            username: {
                 required: true,
-                email: true
+                minlength: 2
             }
         },
         messages: {
             email: {
-                required: "Enter your email",
-                email: "Not a valid email address"
+                required: "Enter your username"
             }
         },
         highlight: function(element) {
