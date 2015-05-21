@@ -110,8 +110,6 @@ $mail->addAddress($user['email'], $user['firstname'] . ' ' . $user['lastname']);
 //Set the subject line
 $mail->Subject = $forgot_pass_email['subject']; // var set in config/mail.php
 
-//TODO make a system to use html files in email
-
 // process php code and pass hash var
 ob_start();
 $hash = $user['hash'];
