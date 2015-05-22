@@ -102,6 +102,8 @@
                 //contentType: "application/json",
                 data: formdata,
                 success: function (data) {
+                    // debug
+                    console.log(data);
                     // parse json data
                     var response = JSON.parse(data);
                     // change well color based on response

@@ -22,23 +22,21 @@ function isLoggedIn()
         $sql = "SELECT * FROM users WHERE username='$username'";
         $result = mysqli_query($con, $sql);
         if ($result->num_rows > 0) {
-            while($user = $result->fetch_assoc()) {
+            while ($user = $result->fetch_assoc()) {
                 if (password_verify($saltypass, $user['password'])) {
                     // it matches
                     // refresh cookie
-                    setcookie("username",$username,time()+31556926 ,'/'); // set cookie for a year
-                    setcookie("saltypass",$saltypass,time()+31556926 ,'/'); // set cookie for a year
+                    setcookie("username", $username, time() + 31556926, '/'); // set cookie for a year
+                    setcookie("saltypass", $saltypass, time() + 31556926, '/'); // set cookie for a year
                     return true;
                 } else {
                     // It doesnt match
                     return false;
                 }
             }
-        }
-        else // user does not exist
+        } else // user does not exist
             return false;
-    }
-    else //cookies not set return not logged in
+    } else //cookies not set return not logged in
         return false;
 }
 
@@ -76,7 +74,7 @@ function getTmpHash()
 {
     global $con;
     $unique = false;
-    while ($unique != true){
+    while ($unique != true) {
         $rand = getRandom(20);
         $sql = "SELECT * FROM tmp_users WHERE 'hash' = '$rand'";
         $result = $con->query($sql);
@@ -86,3 +84,90 @@ function getTmpHash()
     }
     return $rand;
 }
+
+
+/*************************************************
+ * Get Ip address
+ *
+ * Used for various security checks
+ ************************************************/
+
+// Function to get the client IP address
+function get_client_ip()
+{
+    $ipaddress = '';
+    if (!empty($_SERVER['HTTP_CLIENT_IP']))
+        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    else if (!empty($_SERVER['HTTP_X_FORWARDED']))
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+    else if (!empty($_SERVER['HTTP_FORWARDED_FOR']))
+        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    else if (!empty($_SERVER['HTTP_FORWARDED']))
+        $ipaddress = $_SERVER['HTTP_FORWARDED'];
+    else if (!empty($_SERVER['REMOTE_ADDR']))
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+    else
+        $ipaddress = 'UNKNOWN';
+    return ip2long($ipaddress);
+    // returns address as an integer
+}
+
+
+/*************************************************
+ * Add Failed Login
+ *
+ * Adds username to failed logins
+ ************************************************/
+
+function add_failed_login()
+{
+    global $con;
+    $ip = get_client_ip();
+    $sql = "INSERT INTO failed_logins (ip) VALUES ('$ip')";
+
+    if ($con->query($sql) === TRUE) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+/*************************************************
+ * Check if can login
+ *
+ * Returns true of false if user can atempt logging in again.
+ * checks login attempts to confirm
+ ************************************************/
+function can_login()
+{
+    global $con;
+    // minutes to lockout
+    $lockout_time = 10;
+    // the number of failed attempts allowed during lockout time
+    $attempt_limit = 10;
+    // get ip address
+    $ip = get_client_ip();
+
+    // delete outdated failed logins
+    $sql = "DELETE FROM failed_logins WHERE failed_time < NOW() - INTERVAL $lockout_time MINUTE";
+    if ($con->query($sql) === TRUE) {
+        // deleted outdated rows
+    } else {
+        // failed
+    }
+
+    $sql = "SELECT * FROM failed_logins WHERE ip = '$ip' AND failed_time >= NOW() - INTERVAL $lockout_time MINUTE";
+    $result = $con->query($sql);
+    if ($result->num_rows >= $attempt_limit) {
+        // hit failed login limit
+        return false;
+    } else{
+        // has not hit failed login limit
+        return true;
+    }
+
+}
+

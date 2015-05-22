@@ -63,7 +63,21 @@ if ($con->query($sql) === TRUE) {
     $errors .= "Error creating Havoc user table: " . $con->error. '<br>';
 }
 
-if ($tables_created == 3) {
+// Create limit login attempts
+$sql = "CREATE TABLE IF NOT EXISTS `failed_logins` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ip` int(10) unsigned NOT NULL,
+  `failed_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+)";
+
+if ($con->query($sql) === TRUE) {
+    $tables_created++;
+} else {
+    $errors .= "Error creating Havoc user table: " . $con->error. '<br>';
+}
+
+if ($tables_created == 4) {
     echo "Havoc PHP Tables Created Successfully";
 } else {
     echo $errors;
