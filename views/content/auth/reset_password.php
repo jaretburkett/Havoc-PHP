@@ -4,7 +4,9 @@
 include_once($_SERVER['DOCUMENT_ROOT'] . '/config/connect.php');
 
 $userID = $_GET['var2'];
+$userID = mysqli_real_escape_string($con, $userID);
 $hash = $_GET['var3'];
+$hash = mysqli_real_escape_string($con, $hash);
 $userhash = ''; // preset userhash
 
 // check if they reset link is valid

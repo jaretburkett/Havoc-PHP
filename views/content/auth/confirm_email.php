@@ -1,6 +1,7 @@
 <?php
 // get hash from url
 $hash = $_GET['var2'];
+$hash = mysqli_real_escape_string($con, $hash);
 
 // set the success variable
 $success = false;
