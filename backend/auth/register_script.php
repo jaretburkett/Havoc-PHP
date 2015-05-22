@@ -8,6 +8,8 @@
  * the email the entered on the form.
  *************************************************************/
 
+// todo prevent sql injection
+
 // include database connection
 include($_SERVER['DOCUMENT_ROOT'] . '/config/connect.php');
 
@@ -22,6 +24,17 @@ foreach ($_POST as $key => $value) {
     elseif ($key != 'password2') { // done use password 2 as it is just a verifier
         $user[$key] = $value;
     }
+}
+
+// check if username available
+if (!username_aval($user['username'])) {
+    //already registered
+    $response = [
+        'code' => '0',
+        'message' => 'This username is not available'
+    ];
+    echo json_encode($response);
+    die();
 }
 
 //generate a salt specific to the user
@@ -70,7 +83,6 @@ foreach ($user as $key => $value) {
 $sql .= ')';
 // mysql script now in $sql
 
-// todo make a way to check if user exists
 if ($con->query($sql) === TRUE) {
     // success, go ahead and store cookies so they wont have to login later
     // TODO make a way where a var can change cookie length

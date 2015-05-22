@@ -171,3 +171,45 @@ function can_login()
 
 }
 
+/*************************************************
+ * Check if username available
+ *
+ * Returns true or false if username is available.
+ * Checks tmp users and current users.
+ ************************************************/
+function username_aval($un){
+
+    // clean up tmp_users database first
+    cleanup_tmp_users();
+
+    global $con;
+    $username = $un;
+    $sql = "SELECT * FROM users WHERE username='$username'";
+    $result = mysqli_query($con, $sql);
+    if ($result->num_rows > 0) {
+        return false; //already registered
+    } else {
+        // check tmp_users
+        $sql = "SELECT * FROM tmp_users WHERE username='$username'";
+        $result = mysqli_query($con, $sql);
+        if ($result->num_rows > 0) {
+            return false; // registered as tmp user
+        } else {
+            return true;  //username is available
+        }
+    }
+}
+
+/*************************************************
+ * Clean Up tmp_users
+ *
+ * Deletes tmp_users older than 3 days
+ ************************************************/
+
+function cleanup_tmp_users(){
+    global $con;
+    $sql = "DELETE FROM tmp_users WHERE reg_date < NOW() - INTERVAL 3 DAY";
+    if ($con->query($sql) === TRUE) {
+        // deleted outdated tmp users
+    }
+}
