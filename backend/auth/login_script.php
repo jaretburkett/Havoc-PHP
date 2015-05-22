@@ -6,11 +6,13 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 if(!can_login()){
-    // user has hit max failed login attempts in 10 minutes
+    // user has hit max failed login attempts (15) in 10 minutes
     $response = [
         'code' => '0',
         'message' => 'Too many unsuccessful login attempts. You have been locked out for 10 minutes.'
     ];
+    // add another failed login attempt to shut down brute force
+    add_failed_login();
 } else {
     $sql = "SELECT * FROM users WHERE username='$username'";
     $result = mysqli_query($con, $sql);

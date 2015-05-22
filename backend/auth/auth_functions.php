@@ -147,7 +147,7 @@ function can_login()
     // minutes to lockout
     $lockout_time = 10;
     // the number of failed attempts allowed during lockout time
-    $attempt_limit = 10;
+    $attempt_limit = 15;
     // get ip address
     $ip = get_client_ip();
 
