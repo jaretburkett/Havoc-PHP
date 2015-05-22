@@ -3,7 +3,9 @@ include($_SERVER['DOCUMENT_ROOT'] . '/config/connect.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/backend/auth/auth_functions.php');
 
 $username = $_POST['username'];
+$username = mysqli_real_escape_string($con, $username);
 $password = $_POST['password'];
+$password = mysqli_real_escape_string($con, $password);
 
 if(!can_login()){
     // user has hit max failed login attempts (15) in 10 minutes

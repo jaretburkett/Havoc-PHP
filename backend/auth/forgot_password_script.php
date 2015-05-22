@@ -6,6 +6,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/config/connect.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/backend/auth/auth_functions.php');
 
 $username = $_POST['username'];
+$username = mysqli_real_escape_string($con, $username);
 
 $sql = "SELECT * FROM users WHERE username = '$username'";
 $result = mysqli_query($con, $sql);

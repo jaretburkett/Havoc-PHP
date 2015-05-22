@@ -8,8 +8,6 @@
  * the email the entered on the form.
  *************************************************************/
 
-// todo prevent sql injection
-
 // include database connection
 include($_SERVER['DOCUMENT_ROOT'] . '/config/connect.php');
 
@@ -18,10 +16,9 @@ include($_SERVER['DOCUMENT_ROOT'] . '/backend/auth/auth_functions.php');
 
 // put all post vars in array
 foreach ($_POST as $key => $value) {
-    if ($key == 'email'){
+    if ($key == 'email') {
         $user[$key] = strtolower($value); // make email always lowercase
-    }
-    elseif ($key != 'password2') { // done use password 2 as it is just a verifier
+    } elseif ($key != 'password2') { // done use password 2 as it is just a verifier
         $user[$key] = $value;
     }
 }
@@ -44,7 +41,7 @@ $salt = getSalt();
 $user['salt'] = $salt;
 
 // get a salty password to hash from and store in cookies
-$saltypass= crypt($user['password'],$salt);
+$saltypass = crypt($user['password'], $salt);
 
 // change the password to be stored to a password hash of the salty password
 $user['password'] = password_hash($saltypass, PASSWORD_DEFAULT);
@@ -66,6 +63,7 @@ $i = 1;
 $len = count($user);
 $sql = "INSERT INTO tmp_users (";
 foreach ($user as $key => $value) {
+    $key = mysqli_real_escape_string($con, $key);
     $sql .= $key;
     if ($i != $len) // add comma if not last
         $sql .= ", ";
@@ -75,6 +73,7 @@ $sql .= ") VALUES (";
 $i = 1;
 $len = count($user);
 foreach ($user as $key => $value) {
+    $value = mysqli_real_escape_string($con, $value);
     $sql .= "'$value'";
     if ($i != $len) // add comma if not last
         $sql .= ", ";
@@ -86,8 +85,8 @@ $sql .= ')';
 if ($con->query($sql) === TRUE) {
     // success, go ahead and store cookies so they wont have to login later
     // TODO make a way where a var can change cookie length
-    setcookie("username",$user['username'],time()+31556926 ,'/'); // set cookie for a year
-    setcookie("saltypass",$saltypass,time()+31556926 ,'/'); // set cookie for a year
+    setcookie("username", $user['username'], time() + 31556926, '/'); // set cookie for a year
+    setcookie("saltypass", $saltypass, time() + 31556926, '/'); // set cookie for a year
 } else {
     $response = [
         'code' => '0',
@@ -168,7 +167,7 @@ $mail->Subject = $reg_email['subject']; // var set in config/mail.php
 // process php code and pass hash var
 ob_start();
 $hash = $user['hash'];
-include ( $_SERVER['DOCUMENT_ROOT'] . '/views/email/register.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/views/email/register.php');
 $this_mail_body = ob_get_clean();
 
 //Read a php message body from an external file, convert referenced images to embedded,
@@ -178,13 +177,13 @@ $mail->Body = $this_mail_body;
 // make the body for plain text from var in /config/mail.php
 
 $mail_body_partial = explode('%link%', $reg_email['body']);
-$mail_body = $mail_body_partial[0] . $domain . '/confirm_email/' . $user['hash'] . '/'.$mail_body_partial[1];
+$mail_body = $mail_body_partial[0] . $domain . '/confirm_email/' . $user['hash'] . '/' . $mail_body_partial[1];
 
 //Replace the plain text body with one created manually
 $mail->AltBody = $mail_body;
 
 //Attach an image file
-$mail->addAttachment($_SERVER['DOCUMENT_ROOT'].'/resources/img/logo.png', 'logo_2u');
+$mail->addAttachment($_SERVER['DOCUMENT_ROOT'] . '/resources/img/logo.png', 'logo_2u');
 
 //send the message, check for errors
 if (!$mail->send()) {

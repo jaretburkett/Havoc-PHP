@@ -9,14 +9,14 @@ include($_SERVER['DOCUMENT_ROOT'] . '/config/connect.php');
 
 function isLoggedIn()
 {
+    global $con;
     // check to see if cookies are set
     if (isset($_COOKIE['username']) && isset($_COOKIE['saltypass'])) {
         // if cookies set, get cookies
         $username = $_COOKIE['username'];
+        $username = mysqli_real_escape_string($con, $username);
         $saltypass = $_COOKIE['saltypass'];
-
-        // pull global connection var
-        global $con;
+        $saltypass = mysqli_real_escape_string($con, $saltypass);
 
         // pull user data and check salty pass
         $sql = "SELECT * FROM users WHERE username='$username'";
@@ -184,6 +184,7 @@ function username_aval($un){
 
     global $con;
     $username = $un;
+    $username = mysqli_real_escape_string($con, $username);
     $sql = "SELECT * FROM users WHERE username='$username'";
     $result = mysqli_query($con, $sql);
     if ($result->num_rows > 0) {

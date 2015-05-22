@@ -4,8 +4,11 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/config/connect.php');
 include($_SERVER['DOCUMENT_ROOT'] . '/backend/auth/auth_functions.php');
 
 $userID = $_POST['userID'];
+$userID = mysqli_real_escape_string($con, $userID);
 $hash = $_POST['hash'];
+$hash = mysqli_real_escape_string($con, $hash);
 $password = $_POST['password'];
+$password = mysqli_real_escape_string($con, $password);
 
 // check if they reset link was valid
 $sql = "SELECT * FROM forgot_pass WHERE userID = '$userID'";
