@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title><?php echo $website_name; ?></title>
+    <link rel="icon" href="<?php echo $domain.'/resources/img/favicon.png'; ?>">
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
@@ -41,7 +42,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><?php echo $website_name; ?></a>
+            <a class="navbar-brand" href="#">
+                <img src="<?php echo $domain; ?>/resources/img/logo.png" style="height: 30px; margin-top: -5PX;" />
+            </a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
