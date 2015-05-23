@@ -83,6 +83,8 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
+<?php include loading; ?>
+
 </body>
 </html>
 

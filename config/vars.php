@@ -49,4 +49,12 @@ if(isset($_GET['var5'])) $var5 = $_GET['var5']; else $var5 = null;
 if(isset($_GET['var6'])) $var6 = $_GET['var6']; else $var6 = null;
 
 
+/**********************
+ * Loading Overlay
+ *
+ * Put " include loading; " right before the body tag
+ * to include the loading script.
+ */
+define('loading', $_SERVER['DOCUMENT_ROOT'].'/views/snippets/loading.php');
+
 

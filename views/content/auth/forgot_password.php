@@ -75,11 +75,8 @@
     });
 
     function submitForm() {
-        // TODO make a loading display. takes a while. fade for now
-        // remove classes of well
-
-        // dim until loaded
-        $('.form-auth').fadeTo("fast", 0.20);
+        // turn on loading
+        loading('on');
         var formdata = $('.form-auth').serializeArray();
         $.ajax(
             {
@@ -102,8 +99,8 @@
                         $('.toReplace').addClass('alert alert-success')
                             .html(response['message']);
                     }
-                    // undim after done
-                    $('.form-auth').fadeTo("fast", 1);
+                    // turn off loading
+                    loading('off');
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     //if fails
