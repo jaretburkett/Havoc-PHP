@@ -3,7 +3,6 @@
 setcookie("username",'loggedout',time()+1 ,'/'); // set cookie for 1 second
 setcookie("saltypass",'loggedout',time()+1 ,'/'); // set cookie for 1 second
 
-// todo fix this page and make it pretty and use javascript timed redirect
 ?>
 <div class="container">
     <div class="row">
