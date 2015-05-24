@@ -50,7 +50,15 @@ if(empty($page)){
     }
 }
 
-// TODO add 404 routes. It breaks if unfound currently
+/**********************************************
+ * 404 not found routes
+ *********************************************/
+// only if we didnt get a hit before
+if(empty($page)){
+    foreach ($route_404 as &$page) {
+        // put 404 route as page if nothing matches
+    }
+}
 
 
 // check if needs auth
